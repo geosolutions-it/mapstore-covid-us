@@ -1,0 +1,17 @@
+{
+  "proxyUrl": "",
+  "geoStoreUrl": "",
+  "printUrl": "print.json",
+  "themePrefix": "mapstore-covid-us",
+  "translationsPath": "./MapStore2/web/client/translations",
+  "plugins": {
+    "viewer": [
+      {
+        "name": "Map",
+        "cfg": {
+          "mapType": "openlayers"
+        }
+      }
+    ]
+  }
+}
