@@ -1,4 +1,4 @@
-# MapStore COVID US
+# MapStore COVID US Dashboard
 Experimental Dashboard for COVID-19 US Emergency built using [MapStore](https://mapstore.geo-solutions.it/mapstore/#/)
 
 ## Development setup
