@@ -136,6 +136,7 @@ function MapViewerPlugin({
     vectorLayers,
     stateLabelProperty,
     containerNode = document.querySelector('.' + (getConfigProp('themePrefix') || 'ms2') + " > div") || document.body,
+    onLoad = () => {},
     ...props
 }, context) {
 
@@ -177,6 +178,10 @@ function MapViewerPlugin({
             opacity: 0.05
         }
     });
+
+    useEffect(() => {
+        onLoad(loadingPolygon || loadingCentroid);
+    }, [loadingPolygon, loadingCentroid, onLoad]);
 
     useDeepCompareEffect(() => {
         if (isArray(features) && isArray(data) && properties && domain) {

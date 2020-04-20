@@ -12,6 +12,7 @@ import Message from '@mapstore/components/I18N/Message';
 import { scaleLinear } from 'd3-scale';
 import { Button as ButtonRB, Glyphicon } from 'react-bootstrap';
 import tooltip from '@mapstore/components/misc/enhancers/tooltip';
+import Loader from '@mapstore/components/misc/Loader';
 import numeral from 'numeral';
 import useDeepCompareEffect from 'use-deep-compare-effect';
 
@@ -93,6 +94,7 @@ function StatesTable({
                 <tr>
                     <th>
                         <div className="states-btn">
+                            {loading && <Loader size={16}/>}
                             <Button
                                 bsSize="xs"
                                 onClick={() => handleSort(idProperty, 'asc')}>
@@ -127,10 +129,13 @@ function StatesTable({
                             key={entry[idProperty]}>
                             <td><Button
                                 bsSize="xs"
+                                disabled={loading}
                                 bsStyle={entry[idProperty] === selected ? 'primary' : 'default'}
-                                onClick={() =>
-                                    onSelect(entry[idProperty] !== selected && { selected: entry[idProperty] })
-                                }>{info?.[entry[idProperty]]?.[stateLabelProperty] || entry[idProperty]}</Button></td>
+                                onClick={() => {
+                                    if (!loading) {
+                                        onSelect(entry[idProperty] !== selected && { selected: entry[idProperty] });
+                                    }
+                                }}>{info?.[entry[idProperty]]?.[stateLabelProperty] || entry[idProperty]}</Button></td>
                             {properties.map((propertyKey) => <td key={propertyKey}>{numeral(entry[propertyKey]).format('0,0')}</td>)}
                             <td>
                                 <svg viewBox={`0 0 200 ${entry.bars.length * barHeight}`} style={{ width: 200, height: entry.bars.length * barHeight }}>

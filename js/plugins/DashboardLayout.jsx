@@ -219,6 +219,9 @@ function DashboardLayout({
         setDomain({ min: minValue, max: maxValue });
     }, [pendingInfo || pendingCurrent, properties.join(',')]);
 
+
+    const [loadingLayers, setLoadingLayers] = useState(true);
+
     const loadedPluginsKeys = join(Object.keys(context.loadedPlugins || {}), ',');
     const plugins = usePlugins({ items }, context, [loadedPluginsKeys]);
     const buttons = plugins.filter(({ button }) => button).map(({ Component }) => ({ Element: Component }));
@@ -236,6 +239,7 @@ function DashboardLayout({
             bbox={bbox}
             vectorLayers={vectorLayers}
             stateLabelProperty={stateLabelProperty}
+            onLoad={setLoadingLayers}
         />) || null;
 
     const selected = total;
@@ -317,7 +321,7 @@ function DashboardLayout({
                                 id="states-table"
                                 overflow>
                                 <StatesTable
-                                    loading={pendingInfo || pendingCurrent}
+                                    loading={pendingInfo || pendingCurrent || loadingLayers}
                                     data={states}
                                     info={info}
                                     colors={colors}
