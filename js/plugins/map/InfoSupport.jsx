@@ -8,7 +8,6 @@
 
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router';
 import isNumber from 'lodash/isNumber';
 import omit from 'lodash/omit';
 import isString from 'lodash/isString';
@@ -154,9 +153,7 @@ function OLInfoSupport({
 
 export default {
     name: 'infoSupport',
-    impl: withRouter(
-        connect(() => ({}))(
-            withResizeDetector(OLInfoSupport)
-        )
+    impl: connect(() => ({}))(
+        withResizeDetector(OLInfoSupport)
     )
 };

@@ -83,7 +83,7 @@ function StatesTable({
         || sort && sort !== idProperty && properties.indexOf(sort) === -1) {
             onSort({
                 sort: properties[0],
-                order: 'desc'
+                order: 'des'
             });
         }
     }, [ sort, properties, states ]);

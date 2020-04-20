@@ -6,35 +6,29 @@
  * LICENSE file in the root directory of this source tree.
 */
 
-import React, { useState } from 'react';
+import React, { useMemo } from 'react';
 import _range from 'lodash/range';
 import { interpolateNumber } from 'd3-interpolate';
-import useDeepCompareEffect from 'use-deep-compare-effect';
 import numeral from 'numeral';
 import Message from '@mapstore/components/I18N/Message';
 
 function Legend({
-    domain,
-    range,
+    domain = { min: 0, max: 0 },
+    range = [0, 0],
     classes = 4,
-    properties,
-    colors
+    properties = [],
+    colors = {}
 }) {
-
-    const [markers, setMarkers] = useState([]);
-
-    useDeepCompareEffect(() => {
+    const markers = useMemo(() => {
         const interpolateRange = interpolateNumber(range[0], range[1]);
         const interpolateDomain = interpolateNumber(domain?.min, domain?.max);
-        setMarkers(
-            [..._range(classes).map((idx) => {
-                const value = (idx + 1) / classes;
-                return {
-                    size: interpolateRange(value),
-                    label: numeral(interpolateDomain(value)).format('Oa')
-                };
-            })].reverse()
-        );
+        return [..._range(classes).map((idx) => {
+            const value = (idx + 1) / classes;
+            return {
+                size: interpolateRange(value),
+                label: numeral(interpolateDomain(value)).format('Oa')
+            };
+        })].reverse();
     }, [domain, range, classes]);
 
     const margin = 6;
