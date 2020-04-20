@@ -1,0 +1,65 @@
+{
+    "locale": "en-US",
+    "messages": {
+        "customMessages": {
+            "headerTitle": "COVID-19 situation in the United States of America",
+            "builtWith": "Built with",
+            "state": "State",
+            "dateModified": "Last update",
+            "totalTestResults": "Total Test",
+            "positive": "Positive",
+            "negative": "Negative",
+            "death": "Death",
+            "recovered": "Recovered",
+            "hospitalizedCurrently": "Hospitalized",
+            "inIcuCurrently": "In ICU",
+            "onVentilatorCurrently": "On Ventilator",
+
+            "shareButton": "Copy and share page link",
+            "copyLink": "Share link",
+            "copyLinkText": "The page link has been copied on your clipboard",
+
+            "refreshRequest": "Refresh data requests",
+            "refreshRequestTitle": "Refresh",
+            "neverRefresh": "Never",
+            "5Minutes": "Every 5 minutes",
+            "30Minutes": "Every 30 minutes",
+            "1Hour": "Every hour",
+
+            "liveText": "<h2>In the US, as of <span class=\"live-text-date\">{date}</span>*, there have been <span class=\"live-text-confirmed\">{confirmed}</span> confirmed cases of COVID-19, including <span class=\"live-text-deaths\">{deaths}</span> deaths</h2>",
+            "requestDateMessage": "* date referred to the latest data request",
+            "builtWithAttribution": "Built with <a href=\"https://mapstore2.geo-solutions.it/mapstore/#/\" target=\"_blank\" rel=\"noopener noreferrer\">MapStore</a> by <a href=\"https://www.geosolutionsgroup.com/\" target=\"_blank\" rel=\"noopener noreferrer\">GeoSolutions</a>, Code available here and release under xxxx license.<br/>The boundaries and names shown and the designations used on this map do not imply the expression of any opinion whatsoever on the part of the World Health Organization concerning the legal status of any country, territory, city or area or of its authorities, or concerning the delimitation of its frontiers or boundaries.  (TO BE ADJUSTED)",
+            "sourcesAttribution": "Sources: US countries data provided by <a href=\"https://covidtracking.com/\" target=\"_blank\" rel=\"noopener noreferrer\">The COVID Tracking Project</a> API"
+        },
+        "tutorial": {
+            "covidIntro": {
+                "title": "COVID-19 Live Tracker",
+                "text": "tutorial"
+            },
+            "totalsCount": {
+                "title": "Totals Counter",
+                "text": "Counters display total values related to COVID-19 in the US. Click on one or more (maximum 3 cards) to see values of single states in the States Table on the left"
+            },
+            "liveText": {
+                "title": "Live Text",
+                "text": "This text highlights values of confirmed and deaths counts referred to latest request date"
+            },
+            "mapContainer": {
+                "title": "Map Viewer",
+                "text": "The viewer provide a map and tools to navigate COVID-19 data."
+            },
+            "statesTable": {
+                "title": "States Table",
+                "text": "This table shows values for properties selected in the Counters for each available state. Click on a state name to highlight it on the map or click on the table header to sort contents."
+            },
+            "refreshButton": {
+                "title": "Refresh Time",
+                "text": "This dropdown provides options for time interval between request updates"
+            },
+            "shareButton": {
+                "title": "Share",
+                "text": "Click on the share button to copy the url of current view in the clipboard"
+            }
+        }
+    }
+}

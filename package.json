@@ -79,7 +79,12 @@
         "webpack-dev-server": "3.7.2"
     },
     "dependencies": {
-        "mapstore2": "file:MapStore2"
+        "d3-interpolate": "1.4.0",
+        "d3-scale": "3.2.1",
+        "mapstore2": "file:MapStore2",
+        "moment-timezone": "0.5.28",
+        "numeral": "2.0.6",
+        "use-deep-compare-effect": "1.3.1"
     },
     "scripts": {
         "clean": "rimraf dist",
@@ -87,7 +92,9 @@
         "build": "npm install && npm run compile && node ./build.js",
         "start": "webpack-dev-server --mode development --progress --colors --hot --inline --content-base .",
         "lint": "eslint js --ext .jsx,.js",
-        "postinstall": "rimraf node_modules/leaflet-simple-graticule/node_modules && rimraf node_modules/react-sortable-items/node_modules/react-dom && rimraf node_modules/mocha && ncp node_modules/@geosolutions/mocha node_modules/mocha"
+        "postinstall": "rimraf node_modules/leaflet-simple-graticule/node_modules && rimraf node_modules/react-sortable-items/node_modules/react-dom && rimraf node_modules/mocha && ncp node_modules/@geosolutions/mocha node_modules/mocha",
+        "test": "karma start ./karma.conf.single-run.js --colors",
+        "loop:test": "karma start ./karma.conf.continuous-test.js --colors"
     },
     "author": "GeoSolutions",
     "license": "MIT"

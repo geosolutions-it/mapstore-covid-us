@@ -17,12 +17,12 @@ const additionalResources = [
     [frontendDistOutput + 'index.html', publicPath + 'index.html'],
     ['localConfig.json', publicPath + 'localConfig.json'],
     ['print.json', publicPath + 'print.json'],
-    ['MapStore2/web/client/translations/', publicPath + 'MapStore2/web/client/translations/']
+    ['MapStore2/web/client/translations/', publicPath + 'MapStore2/web/client/translations/'],
+    ['translations/', publicPath + 'translations/'],
+    ['static/', publicPath + 'static/']
 ];
 
-const filesAndDirectoriesToRemove = [
-
-];
+const filesAndDirectoriesToRemove = [];
 
 function copyDist() {
     return new Promise(function(resolve, reject) {

@@ -3,13 +3,224 @@
   "geoStoreUrl": "",
   "printUrl": "print.json",
   "themePrefix": "mapstore-covid-us",
-  "translationsPath": "./MapStore2/web/client/translations",
+  "translationsPath": [
+    "./MapStore2/web/client/translations",
+    "./translations"
+  ],
+  "initialState": {
+    "defaultState": {
+      "maptype": {
+        "mapType": "openlayers"
+      },
+      "locales": {
+        "supportedLocales": {
+          "en": {
+            "code": "en-US",
+            "description": "English"
+          }
+        }
+      }
+    }
+  },
   "plugins": {
     "viewer": [
       {
-        "name": "Map",
+        "name": "Notifications",
         "cfg": {
-          "mapType": "openlayers"
+          "style": {
+            "NotificationItem": {
+              "success": {
+                "backgroundColor": "#fff",
+                "color": "#333",
+                "borderColor": "#55e080",
+                "boxShadow": "0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22)",
+                "borderRadius": 0
+              },
+              "error": {
+                "backgroundColor": "#fff",
+                "color": "#333",
+                "borderColor": "#db0033",
+                "boxShadow": "0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22)",
+                "borderRadius": 0
+              }
+            },
+            "Title": {
+              "success": {
+                "color": "#000"
+              },
+              "error": {
+                "color": "#000"
+              }
+            },
+            "Dismiss": {
+              "success": {
+                "color": "#333",
+                "backgroundColor": "transparent"
+              },
+              "error": {
+                "color": "#333",
+                "backgroundColor": "transparent"
+              }
+            }
+          }
+        }
+      },
+      {
+        "name": "MapViewer",
+        "override": {
+          "DashboardLayout": {
+            "id": "map",
+            "priority": 1
+          }
+        }
+      },
+      "DashboardLayout",
+      {
+        "name": "Toolbar",
+        "id": "NavigationBar",
+        "override": {
+          "MapViewer": {
+            "priority": 1
+          }
+        },
+        "cfg": {
+          "id": "navigationBar"
+        }
+      },
+      {
+        "name": "FullScreen",
+        "override": {
+          "Toolbar": {
+            "alwaysVisible": true
+          }
+        }
+      },
+      {
+        "name": "ZoomIn",
+        "override": {
+          "Toolbar": {
+            "alwaysVisible": true
+          }
+        }
+      },
+      {
+        "name": "ZoomOut",
+        "override": {
+          "Toolbar": {
+            "alwaysVisible": true
+          }
+        }
+      },
+      {
+        "name": "ZoomAll",
+        "override": {
+          "Toolbar": {
+            "alwaysVisible": true
+          }
+        }
+      },
+      {
+        "name": "BackgroundSelector",
+        "override": {
+          "MapViewer": {
+            "priority": 1
+          }
+        }
+      },
+      {
+        "name": "Search",
+        "override": {
+          "MapViewer": {
+            "priority": 1
+          }
+        },
+        "cfg": {
+          "showOptions": false,
+          "resultsStyle": {
+            "iconUrl": "static/marker-search.svg",
+            "shadowUrl": "static/marker-shadow.png",
+            "iconSize": [
+              25,
+              41
+            ],
+            "iconAnchor": [
+              12,
+              41
+            ],
+            "popupAnchor": [
+              1,
+              -34
+            ],
+            "shadowSize": [
+              41,
+              41
+            ],
+            "color": "#f2f2f2",
+            "weight": 3,
+            "dashArray": "4 8",
+            "fillColor": "#333333",
+            "fillOpacity": 0.2
+          }
+        }
+      },
+      {
+        "name": "Refresh",
+        "override": {
+          "DashboardLayout": {
+            "priority": 1,
+            "button": true
+          }
+        }
+      },
+      {
+        "name": "Share",
+        "override": {
+          "DashboardLayout": {
+            "priority": 1,
+            "button": true
+          }
+        }
+      },
+      {
+        "name": "Tutorial",
+        "cfg": {
+          "allowClicksThruHole": false,
+          "containerPosition": "header",
+          "preset": "covid",
+          "presetList": {
+            "covid": [
+              {
+                "translation": "covidIntro",
+                "selector": "#intro-tutorial"
+              },
+              {
+                "translation": "totalsCount",
+                "selector": "#totals-count",
+                "position": "right"
+              },
+              {
+                "translation": "liveText",
+                "selector": "#live-text"
+              },
+              {
+                "translation": "mapContainer",
+                "selector": "#map-container"
+              },
+              {
+                "translation": "statesTable",
+                "selector": "#states-table",
+                "position": "left"
+              },
+              {
+                "translation": "refreshButton",
+                "selector": "#refresh-button"
+              },
+              {
+                "translation": "shareButton",
+                "selector": "#share-button"
+              }
+            ]
+          }
         }
       }
     ]

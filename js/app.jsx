@@ -29,7 +29,9 @@ const pathsNeedVersion = [
     'localConfig.json',
     'map.json',
     'translations/',
-    'print.json'
+    'print.json',
+    'states-centroid.json',
+    'states-polygon.json'
 ];
 
 axios.interceptors.request.use(

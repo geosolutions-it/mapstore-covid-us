@@ -6,10 +6,36 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import MapPlugin from '@mapstore/plugins/Map';
+import BackgroundSelectorPlugin from '@mapstore/plugins/BackgroundSelector';
+import NotificationsPlugin from '@mapstore/plugins/Notifications';
+import SearchPlugin from '@mapstore/plugins/Search';
+import ToolbarPlugin from '@mapstore/plugins/Toolbar';
+import TutorialPlugin from '@mapstore/plugins/Tutorial';
+import ZoomInPlugin from '@mapstore/plugins/ZoomIn';
+import ZoomOutPlugin from '@mapstore/plugins/ZoomOut';
+
+import DashboardLayoutPlugin from '@js/plugins/DashboardLayout';
+import FullScreenPlugin from '@js/plugins/FullScreen';
+import MapViewerPlugin from '@js/plugins/MapViewer';
+import RefreshPlugin from '@js/plugins/Refresh';
+import SharePlugin from '@js/plugins/Share';
+import ZoomAllPlugin from '@js/plugins/ZoomAll';
 
 export const plugins = {
-    MapPlugin
+    BackgroundSelectorPlugin,
+    NotificationsPlugin,
+    SearchPlugin,
+    ToolbarPlugin,
+    TutorialPlugin,
+    ZoomInPlugin,
+    ZoomOutPlugin,
+
+    DashboardLayoutPlugin,
+    FullScreenPlugin,
+    MapViewerPlugin,
+    RefreshPlugin,
+    SharePlugin,
+    ZoomAllPlugin
 };
 
 export const requires = {};
