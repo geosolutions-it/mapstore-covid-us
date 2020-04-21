@@ -24,12 +24,12 @@
         "thumbURL": "static/osm-simple-dark.jpg",
         "type": "wms",
         "url": [
-          "http://1maps.geo-solutions.it/geoserver/wms",
-          "http://2maps.geo-solutions.it/geoserver/wms",
-          "http://3maps.geo-solutions.it/geoserver/wms",
-          "http://4maps.geo-solutions.it/geoserver/wms",
-          "http://5maps.geo-solutions.it/geoserver/wms",
-          "http://6maps.geo-solutions.it/geoserver/wms"
+          "https://1maps.geo-solutions.it/geoserver/wms",
+          "https://2maps.geo-solutions.it/geoserver/wms",
+          "https://3maps.geo-solutions.it/geoserver/wms",
+          "https://4maps.geo-solutions.it/geoserver/wms",
+          "https://5maps.geo-solutions.it/geoserver/wms",
+          "https://6maps.geo-solutions.it/geoserver/wms"
         ],
         "source": "osm_simple_dark",
         "visibility": true,
@@ -47,12 +47,12 @@
         "thumbURL": "static/osm-simple-light.jpeg",
         "type": "wms",
         "url": [
-          "http://1maps.geo-solutions.it/geoserver/wms",
-          "http://2maps.geo-solutions.it/geoserver/wms",
-          "http://3maps.geo-solutions.it/geoserver/wms",
-          "http://4maps.geo-solutions.it/geoserver/wms",
-          "http://5maps.geo-solutions.it/geoserver/wms",
-          "http://6maps.geo-solutions.it/geoserver/wms"
+          "https://1maps.geo-solutions.it/geoserver/wms",
+          "https://2maps.geo-solutions.it/geoserver/wms",
+          "https://3maps.geo-solutions.it/geoserver/wms",
+          "https://4maps.geo-solutions.it/geoserver/wms",
+          "https://5maps.geo-solutions.it/geoserver/wms",
+          "https://6maps.geo-solutions.it/geoserver/wms"
         ],
         "source": "osm_simple_light",
         "visibility": false,
@@ -70,12 +70,12 @@
         "thumbURL": "static/osm-bright.jpg",
         "type": "wms",
         "url": [
-          "http://1maps.geo-solutions.it/geoserver/wms",
-          "http://2maps.geo-solutions.it/geoserver/wms",
-          "http://3maps.geo-solutions.it/geoserver/wms",
-          "http://4maps.geo-solutions.it/geoserver/wms",
-          "http://5maps.geo-solutions.it/geoserver/wms",
-          "http://6maps.geo-solutions.it/geoserver/wms"
+          "https://1maps.geo-solutions.it/geoserver/wms",
+          "https://2maps.geo-solutions.it/geoserver/wms",
+          "https://3maps.geo-solutions.it/geoserver/wms",
+          "https://4maps.geo-solutions.it/geoserver/wms",
+          "https://5maps.geo-solutions.it/geoserver/wms",
+          "https://6maps.geo-solutions.it/geoserver/wms"
         ],
         "source": "osm",
         "visibility": false,
@@ -93,12 +93,12 @@
         "thumbURL": "static/s2cloudless.jpeg",
         "type": "wms",
         "url": [
-          "http://1maps.geo-solutions.it/geoserver/wms",
-          "http://2maps.geo-solutions.it/geoserver/wms",
-          "http://3maps.geo-solutions.it/geoserver/wms",
-          "http://4maps.geo-solutions.it/geoserver/wms",
-          "http://5maps.geo-solutions.it/geoserver/wms",
-          "http://6maps.geo-solutions.it/geoserver/wms"
+          "https://1maps.geo-solutions.it/geoserver/wms",
+          "https://2maps.geo-solutions.it/geoserver/wms",
+          "https://3maps.geo-solutions.it/geoserver/wms",
+          "https://4maps.geo-solutions.it/geoserver/wms",
+          "https://5maps.geo-solutions.it/geoserver/wms",
+          "https://6maps.geo-solutions.it/geoserver/wms"
         ],
         "source": "s2cloudless",
         "visibility": false,
