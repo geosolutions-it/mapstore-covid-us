@@ -22,7 +22,7 @@
             "refreshRequest": "Refresh data requests",
             "refreshRequestTitle": "Refresh",
             "neverRefresh": "Never",
-            "5Minutes": "Every 5 minutes",
+            "15Minutes": "Every 15 minutes",
             "30Minutes": "Every 30 minutes",
             "1Hour": "Every hour",
 

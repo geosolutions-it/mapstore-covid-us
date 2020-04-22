@@ -338,7 +338,9 @@ function DashboardLayout({
                             </Flex>
                         </Flex>
                     </Flex>
-                    <Flex direction="row">
+                    <Flex
+                        direction="row"
+                        className="attributions-container">
                         <div className="text-box">
                             <HTML msgId="customMessages.builtWithAttribution" />
                         </div>

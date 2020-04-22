@@ -81,7 +81,6 @@
         font-style: italic;
         height: ~"calc(100% - 1em)";
         display: flex;
-        align-items: center;
         text-align: center;
         justify-content: center;
     }
@@ -152,6 +151,21 @@
             display: inline-block;
             border-bottom: 2px solid #000000;
             font-weight: bold;
+        }
+    }
+
+    .attributions-container {
+        max-height: 200px;
+        .text-box {
+            overflow: auto;
+            padding-top: 16px;
+            padding-bottom: 16px;
+        }
+
+        .credits-divider {
+            .text-box {
+                align-items: center;
+            }
         }
     }
 }

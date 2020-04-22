@@ -56,8 +56,8 @@ const customRefreshTimer = (action$) =>
 
 function Refresh({
     defaultInterval = {
-        value: 5 * 60 * 1000,
-        labelId: 'customMessages.5Minutes'
+        value: 15 * 60 * 1000,
+        labelId: 'customMessages.15Minutes'
     },
     selectedInterval,
     onSelect = () => {},
@@ -67,8 +67,8 @@ function Refresh({
             labelId: 'customMessages.neverRefresh'
         },
         {
-            value: 5 * 60 * 1000,
-            labelId: 'customMessages.5Minutes'
+            value: 15 * 60 * 1000,
+            labelId: 'customMessages.15Minutes'
         },
         {
             value: 30 * 60 * 1000,

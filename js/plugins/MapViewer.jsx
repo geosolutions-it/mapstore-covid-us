@@ -6,7 +6,7 @@
  * LICENSE file in the root directory of this source tree.
 */
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import { createPortal } from 'react-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -61,7 +61,6 @@ const useVectorLayer = ({
     info,
     data,
     style,
-    onUpdateNode,
     idProperty
 }) => {
     const [features, setFeatures] = useState([]);
@@ -96,7 +95,11 @@ const useVectorLayer = ({
             onRemoveLayer(id);
         };
     }, []);
-    useDeepCompareEffect(() => {
+
+    const computedFeatures = useMemo(() => {
+        if (!info || !data) {
+            return [ ...features ];
+        }
         const dataByState = data.reduce((acc, entry) => ({ ...acc, [entry[idProperty]]: { ...entry } }), {});
         const newFeatures = features.map((feature) => ({
             ...feature,
@@ -106,10 +109,13 @@ const useVectorLayer = ({
                 ...dataByState[feature.properties[idProperty]]
             }
         }));
-        setFeatures(newFeatures);
-        onUpdateNode(id, 'layers', { features: newFeatures });
+        return newFeatures;
     }, [info, features, data]);
-    return { loading, features };
+
+    return {
+        loading,
+        features: computedFeatures
+    };
 };
 
 function MapViewerPlugin({
@@ -157,7 +163,6 @@ function MapViewerPlugin({
         url: vectorLayers?.centroid?.url,
         onAddLayer,
         onRemoveLayer,
-        onUpdateNode,
         idProperty
     });
 
@@ -169,7 +174,6 @@ function MapViewerPlugin({
         url: vectorLayers?.polygon?.url,
         onAddLayer,
         onRemoveLayer,
-        onUpdateNode,
         idProperty,
         style: {
             fillColor: '#ffffff',
@@ -213,7 +217,7 @@ function MapViewerPlugin({
                 features: newFeatures
             });
         }
-    }, [ features, data, properties, domain ]);
+    }, [ info, data, features, properties, domain ]);
 
 
     useEffect(() => {
