@@ -32,13 +32,9 @@ jobs:
       env:
         CI: true
 
-    - name: Create Build artifact tar.gz
-      working-directory: ${{ github.workspace }}
-      run: tar czvf ./build.tar.gz ./build
-
     - name: Store Artifact
       uses: actions/upload-artifact@v1
       with:
-        name: build.tar.gz
-        path: ./build.tar.gz
+        name: build.zip
+        path: ./build
 
