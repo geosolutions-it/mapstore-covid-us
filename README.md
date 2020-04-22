@@ -1,3 +1,5 @@
+![mapstore-covid-us](https://github.com/geosolutions-it/mapstore-covid-us/workflows/mapstore-covid-us/badge.svg)
+
 # MapStore COVID US Dashboard
 Experimental Dashboard for COVID-19 US Emergency built using [MapStore](https://mapstore.geo-solutions.it/mapstore/#/)
 
