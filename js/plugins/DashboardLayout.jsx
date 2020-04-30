@@ -62,26 +62,7 @@ function DashboardLayout({
             url: 'static/states-centroid.json'
         }
     },
-    endpoint = {
-        info: {
-            url: 'https://covidtracking.com/api/v1/states/info.json',
-            propertiesKeys: ['state', 'name']
-        },
-        current: {
-            url: 'https://covidtracking.com/api/v1/states/current.json',
-            propertiesKeys: ['state', 'dateModified'],
-            countKeys: [
-                'totalTestResults',
-                'positive',
-                'negative',
-                'death',
-                'recovered',
-                'hospitalizedCurrently',
-                'inIcuCurrently',
-                'onVentilatorCurrently'
-            ]
-        }
-    },
+    endpoint = {},
     items,
     history,
     location,
