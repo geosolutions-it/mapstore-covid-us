@@ -10,7 +10,6 @@ import BackgroundSelectorPlugin from '@mapstore/plugins/BackgroundSelector';
 import NotificationsPlugin from '@mapstore/plugins/Notifications';
 import SearchPlugin from '@mapstore/plugins/Search';
 import ToolbarPlugin from '@mapstore/plugins/Toolbar';
-import TutorialPlugin from '@mapstore/plugins/Tutorial';
 import ZoomInPlugin from '@mapstore/plugins/ZoomIn';
 import ZoomOutPlugin from '@mapstore/plugins/ZoomOut';
 
@@ -19,6 +18,7 @@ import FullScreenPlugin from '@js/plugins/FullScreen';
 import MapViewerPlugin from '@js/plugins/MapViewer';
 import RefreshPlugin from '@js/plugins/Refresh';
 import SharePlugin from '@js/plugins/Share';
+import TutorialPlugin from '@js/plugins/Tutorial';
 import ZoomAllPlugin from '@js/plugins/ZoomAll';
 
 export const plugins = {
@@ -26,7 +26,6 @@ export const plugins = {
     NotificationsPlugin,
     SearchPlugin,
     ToolbarPlugin,
-    TutorialPlugin,
     ZoomInPlugin,
     ZoomOutPlugin,
 
@@ -35,6 +34,7 @@ export const plugins = {
     MapViewerPlugin,
     RefreshPlugin,
     SharePlugin,
+    TutorialPlugin,
     ZoomAllPlugin
 };
 

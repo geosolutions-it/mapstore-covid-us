@@ -9,6 +9,8 @@
 import React from 'react';
 import Message from '@mapstore/components/I18N/Message';
 import numeral from 'numeral';
+import isEmpty from 'lodash/isEmpty';
+import Loader from '@mapstore/components/misc/Loader';
 
 function Counter({
     property,
@@ -40,6 +42,20 @@ function TotalsCounter({
     onSelect = () => {},
     selectEnabled
 }) {
+    if (isEmpty(data)) {
+        return (
+            <div
+                style={{
+                    width: '100%',
+                    height: '100%',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center'
+                }}>
+                <Loader size={70} />
+            </div>
+        );
+    }
     return (
         <>
             {Object.keys(data).map(key => (

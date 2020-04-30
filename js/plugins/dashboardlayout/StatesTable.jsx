@@ -15,6 +15,7 @@ import tooltip from '@mapstore/components/misc/enhancers/tooltip';
 import Loader from '@mapstore/components/misc/Loader';
 import numeral from 'numeral';
 import useDeepCompareEffect from 'use-deep-compare-effect';
+import isEmpty from 'lodash/isEmpty';
 
 const Button = tooltip(ButtonRB);
 
@@ -88,6 +89,21 @@ function StatesTable({
         }
     }, [ sort, properties, states ]);
 
+    if (isEmpty(states)) {
+        return (
+            <div
+                style={{
+                    width: '100%',
+                    height: '100%',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center'
+                }}>
+                <Loader size={70} />
+            </div>
+        );
+    }
+
     return (
         <table className="states-table">
             <thead>
@@ -123,6 +139,7 @@ function StatesTable({
             <tbody>
                 {states.map((entry) => {
                     const barHeight = 28 / entry.bars.length;
+                    const stateLabel = info?.[entry[idProperty]]?.[stateLabelProperty] || entry[idProperty];
                     return (
                         <tr
                             className="state-row"
@@ -131,11 +148,13 @@ function StatesTable({
                                 bsSize="xs"
                                 disabled={loading}
                                 bsStyle={entry[idProperty] === selected ? 'primary' : 'default'}
+                                tooltip={stateLabel}
+                                tooltipPosition="left"
                                 onClick={() => {
                                     if (!loading) {
                                         onSelect(entry[idProperty] !== selected && { selected: entry[idProperty] });
                                     }
-                                }}>{info?.[entry[idProperty]]?.[stateLabelProperty] || entry[idProperty]}</Button></td>
+                                }}>{stateLabel}</Button></td>
                             {properties.map((propertyKey) => <td key={propertyKey}>{numeral(entry[propertyKey]).format('0,0')}</td>)}
                             <td>
                                 <svg viewBox={`0 0 200 ${entry.bars.length * barHeight}`} style={{ width: 200, height: entry.bars.length * barHeight }}>

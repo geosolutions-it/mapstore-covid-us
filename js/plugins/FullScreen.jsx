@@ -14,6 +14,7 @@ import tooltip from '@mapstore/components/misc/enhancers/buttonTooltip';
 import { withRouter } from 'react-router';
 import { createSelector } from 'reselect';
 import { setControlProperties } from '@mapstore/actions/controls';
+import exitFullscreen from '../../themes/default/svg/exit-full-screen-w.svg';
 const Button = tooltip(ButtonRB);
 
 function FullScreen({
@@ -27,7 +28,9 @@ function FullScreen({
             tooltipId={fullscreen ? 'fullscreen.tooltipDeactivate' : 'fullscreen.tooltipActivate'}
             tooltipPosition="left"
             onClick={() => onClick(!fullscreen)}>
-            <Glyphicon glyph="1-full-screen"/>
+            {fullscreen
+                ? <img src={exitFullscreen} width={26} height="auto"/>
+                : <Glyphicon glyph="1-full-screen"/>}
         </Button>
     );
 }

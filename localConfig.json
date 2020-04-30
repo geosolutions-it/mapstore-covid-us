@@ -7,6 +7,75 @@
     "./MapStore2/web/client/translations",
     "./translations"
   ],
+  "mcConfig": {
+    "defaultQueryProperties": [
+      "positive",
+      "death",
+      "recovered"
+    ],
+    "maxSelectedProperties": 3,
+    "idProperty": "state",
+    "stateLabelProperty": "name",
+    "liveTextConfirmedProperty": "positive",
+    "liveTextDeathsProperty": "death",
+    "highlightColor": "#fff65a",
+    "bbox": [
+      144.7694,
+      -13.80,
+      -66.949895,
+      71.352561
+    ],
+    "colors": {
+      "death": "#000000",
+      "totalTestResults": "#49b9ff",
+      "positive": "#ff33aa",
+      "negative": "#ffaa33",
+      "recovered": "#93efad",
+      "hospitalizedCurrently": "#22ad99",
+      "inIcuCurrently": "#bb5bff",
+      "onVentilatorCurrently": "#ffaacc"
+    },
+    "vectorLayers": {
+      "polygon": {
+        "url": "static/states-polygon.json"
+      },
+      "centroid": {
+        "url": "static/states-centroid.json"
+      }
+    },
+    "endpoint": {
+      "info": {
+        "url": "https://covidtracking.com/api/v1/states/info.json",
+        "propertiesKeys": [
+          "state",
+          "name"
+        ]
+      },
+      "current": {
+        "url": "https://covidtracking.com/api/v1/states/current.json",
+        "propertiesKeys": [
+          "state",
+          "dateModified"
+        ],
+        "countKeys": [
+          "totalTestResults",
+          "positive",
+          "negative",
+          "death",
+          "recovered",
+          "hospitalizedCurrently",
+          "inIcuCurrently",
+          "onVentilatorCurrently"
+        ]
+      },
+      "daily": {
+        "url": "https://covidtracking.com/api/v1/us/daily.json"
+      },
+      "dailyState": {
+        "url": "https://covidtracking.com/api/v1/states/{state}/daily.json"
+      }
+    }
+  },
   "initialState": {
     "defaultState": {
       "maptype": {
@@ -74,37 +143,7 @@
           }
         }
       },
-      {
-        "name": "DashboardLayout",
-        "cfg": {
-          "endpoint": {
-            "info": {
-              "url": "https://covidtracking.com/api/v1/states/info.json",
-              "propertiesKeys": [
-                "state",
-                "name"
-              ]
-            },
-            "current": {
-              "url": "https://covidtracking.com/api/v1/states/current.json",
-              "propertiesKeys": [
-                "state",
-                "dateModified"
-              ],
-              "countKeys": [
-                "totalTestResults",
-                "positive",
-                "negative",
-                "death",
-                "recovered",
-                "hospitalizedCurrently",
-                "inIcuCurrently",
-                "onVentilatorCurrently"
-              ]
-            }
-          }
-        }
-      },
+      "DashboardLayout",
       {
         "name": "Toolbar",
         "id": "NavigationBar",
@@ -216,8 +255,9 @@
         "cfg": {
           "allowClicksThruHole": false,
           "containerPosition": "header",
-          "preset": "covid",
+          "preset": "empty",
           "presetList": {
+            "empty": [],
             "covid": [
               {
                 "translation": "covidIntro",
@@ -235,6 +275,11 @@
               {
                 "translation": "mapContainer",
                 "selector": "#map-container"
+              },
+              {
+                "translation": "chartContainer",
+                "selector": "#date-count-chart",
+                "position": "top"
               },
               {
                 "translation": "statesTable",

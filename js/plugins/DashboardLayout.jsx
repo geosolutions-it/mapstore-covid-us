@@ -27,54 +27,76 @@ import { withRouter } from 'react-router';
 import Toolbar from '@mapstore/components/misc/toolbar/Toolbar';
 import StatesTable from '@js/plugins/dashboardlayout/StatesTable';
 import TotalsCounter from '@js/plugins/dashboardlayout/TotalsCounter';
-import Flex from '@js/plugins/dashboardlayout/Flex';
 import LiveText from '@js/plugins/dashboardlayout/LiveText';
 import { getQueryParams, setQueryParams } from '@js/utils/ProjectUtils';
-import useDeepCompareEffect from 'use-deep-compare-effect';
+import ExpandableChart from '@js/plugins/dashboardlayout/Chart';
+import { Observable } from 'rxjs';
+import { LOCAL_CONFIG_LOADED } from '@mapstore/actions/localConfig';
+import { MAP_CONFIG_LOADED } from '@mapstore/actions/config';
+import { setupTutorial } from '@mapstore/actions/tutorial';
+import { replace, LOCATION_CHANGE } from 'connected-react-router';
+import { setControlProperty } from '@mapstore/actions/controls';
+import { getConfigProp } from '@mapstore/utils/ConfigUtils';
+
 const CancelToken = axios.CancelToken;
 
-function DashboardLayout({
+const mcuInitProject = (action$, store) =>
+    action$.ofType(LOCAL_CONFIG_LOADED).switchMap(() =>
+        action$.ofType(MAP_CONFIG_LOADED)
+            .switchMap(() => {
+                const state = store.getState();
+                const tutorialPresetList = state?.tutorial?.presetList || {};
+                const tutorialKey = 'covid';
+                return Observable.of(
+                    setupTutorial(tutorialKey, tutorialPresetList[tutorialKey]),
+                    setControlProperty('dashboardlayout', 'loading', false)
+                );
+            })
+    );
+
+const mcCheckLocationChange = (action$) =>
+    action$.ofType(LOCATION_CHANGE)
+        .switchMap((action) => {
+            const location = action?.payload?.location;
+            const query = getQueryParams(location);
+            const  { defaultQueryProperties = ['positive'] } = getConfigProp('mcConfig') || {};
+            return !query?.properties
+                ? Observable.of(replace(setQueryParams({
+                    ...query,
+                    properties: defaultQueryProperties.join(','),
+                    sort: defaultQueryProperties[0],
+                    order: 'des'
+                })))
+                : Observable.empty();
+        });
+
+function DashboardLayoutComponent({
     headerLogo = 'static/mapstore-logo.png',
     headerLink = 'https://mapstore2.geo-solutions.it/',
-    maxSelectedProperties = 3,
-    defaultProperty = 'positive',
-    idProperty = 'state',
-    stateLabelProperty = 'name',
-    liveTextConfirmedProperty = 'positive',
-    liveTextDeathsProperty = 'death',
-    highlightColor = '#fff65a',
-    bbox = [ 144.7694, -13.80, -66.949895, 71.352561 ],
-    colors = {
-        death: '#000000',
-        totalTestResults: '#49b9ff',
-        positive: '#ff33aa',
-        negative: '#ffaa33',
-        recovered: '#93efad',
-        hospitalizedCurrently: '#22ad99',
-        inIcuCurrently: '#bb5bff',
-        onVentilatorCurrently: '#ffaacc'
-    },
-    vectorLayers = {
-        polygon: {
-            url: 'static/states-polygon.json'
-        },
-        centroid: {
-            url: 'static/states-centroid.json'
-        }
-    },
-    endpoint = {},
     items,
     history,
     location,
     requestsNeedUpdate,
-    requestDate
-}, context) {
+    requestDate,
+    loadedPlugins
+}) {
+
+    const {
+        maxSelectedProperties,
+        idProperty,
+        stateLabelProperty,
+        liveTextConfirmedProperty,
+        liveTextDeathsProperty,
+        highlightColor,
+        bbox,
+        colors,
+        vectorLayers,
+        endpoint
+    } = getConfigProp('mcConfig') || {};
 
     const [info, setInfo] = useState({});
     const [total, setTotal] = useState({});
     const [states, setStates] = useState([]);
-
-    const stateTableRef = useRef();
 
     function handleSelectProperty(selected) {
         const { properties = '', ...query } = getQueryParams(location);
@@ -113,18 +135,7 @@ function DashboardLayout({
     }
 
     const query = getQueryParams(location);
-    const properties = query?.properties?.split?.(',')?.filter?.(val => val) || [defaultProperty];
-
-    useDeepCompareEffect(() => {
-        if (!query?.properties) {
-            history.push(
-                setQueryParams({
-                    ...query,
-                    properties: defaultProperty
-                })
-            );
-        }
-    }, [ query, history, defaultProperty ]);
+    const properties = query?.properties?.split?.(',')?.filter?.(val => val) || [];
 
     const { pending: pendingInfo } = usePromise({
         promiseFn: (cancelToken) =>
@@ -203,8 +214,8 @@ function DashboardLayout({
 
     const [loadingLayers, setLoadingLayers] = useState(true);
 
-    const loadedPluginsKeys = join(Object.keys(context.loadedPlugins || {}), ',');
-    const plugins = usePlugins({ items }, context, [loadedPluginsKeys]);
+    const loadedPluginsKeys = join(Object.keys(loadedPlugins || {}), ',');
+    const plugins = usePlugins({ items }, { loadedPlugins }, [loadedPluginsKeys]);
     const buttons = plugins.filter(({ button }) => button).map(({ Component }) => ({ Element: Component }));
     const { Component } = find(plugins, ({ id }) => id === 'map') || {};
     const mapComponent = Component && (
@@ -248,111 +259,112 @@ function DashboardLayout({
                     />
                 </div>
             }>
-            <Flex
-                flex={1}
-                direction="row"
-                fit
-                overflow>
-                <Flex
-                    id="totals-count"
-                    overflow>
-                    <TotalsCounter
-                        data={total}
-                        colors={colors}
-                        selectEnabled={properties.length < maxSelectedProperties}
-                        onSelect={handleSelectProperty}
-                        properties={properties}
-                    />
-                </Flex>
-                <Flex
-                    flex={1}
-                    fit
-                    overflow>
-                    <Flex
-                        flex={1}
-                        fit
-                        direction="row"
-                        overflow>
-                        <Flex
-                            flex={1}>
-                            <LiveText
-                                date={requestDate}
-                                confirmed={selected[liveTextConfirmedProperty]}
-                                deaths={selected[liveTextDeathsProperty]}
-                            />
-                            <Flex
-                                flex={1}>
-                                <div
-                                    style={{
-                                        position: 'absolute',
-                                        width: '100%',
-                                        height: '100%',
-                                        padding: '0.5em'
-                                    }}>
-                                    {mapComponent}
-                                </div>
-                            </Flex>
-                        </Flex>
-                        <Flex
-                            className="states-table-col"
-                            ref={stateTableRef}>
-                            <Flex
-                                className="states-table-container"
-                                flex={1}
-                                id="states-table"
-                                overflow>
-                                <StatesTable
-                                    loading={pendingInfo || pendingCurrent || loadingLayers}
-                                    data={states}
-                                    info={info}
-                                    colors={colors}
-                                    properties={properties}
-                                    domain={domain}
-                                    idProperty={idProperty}
-                                    stateLabelProperty={stateLabelProperty}
-                                    selected={query?.selected}
-                                    onSelect={handleStatesSelect}
-                                    sort={query?.sort}
-                                    order={query?.order}
-                                    onSort={handleStatesSort}
-                                />
-                            </Flex>
-                        </Flex>
-                    </Flex>
-                    <Flex
-                        direction="row"
-                        className="attributions-container">
-                        <div className="text-box">
-                            <HTML msgId="customMessages.builtWithAttribution" />
-                        </div>
-                        <div
-                            className="credits-divider"
-                            style={{
-                                width: stateTableRef?.current?.clientWidth,
-                                minWidth: stateTableRef?.current?.clientWidth
-                            }}>
-                            <div className="text-box">
-                                <HTML msgId="customMessages.sourcesAttribution"/>
+
+            <div className="dashboard-layout-body">
+
+                <div className="dashboard-layout-count-group">
+                    <div
+                        id="totals-count"
+                        className="totals-count">
+                        <TotalsCounter
+                            data={total}
+                            colors={colors}
+                            selectEnabled={properties.length < maxSelectedProperties}
+                            onSelect={handleSelectProperty}
+                            properties={properties}
+                        />
+                    </div>
+                    <div className="map-viewer-col">
+                        <LiveText
+                            date={requestDate}
+                            confirmed={selected[liveTextConfirmedProperty]}
+                            deaths={selected[liveTextDeathsProperty]}
+                        />
+                        <div className="map-viewer-container">
+                            <div>
+                                {mapComponent}
                             </div>
                         </div>
-                    </Flex>
-                </Flex>
-            </Flex>
+                        <ExpandableChart
+                            endpoint={endpoint}
+                            properties={properties}
+                            colors={colors}
+                            selected={query?.selected}
+                            stateLabelProperty={stateLabelProperty}
+                            info={info}
+                        />
+                    </div>
+                </div>
+
+                <div className="states-table-col">
+                    <div
+                        className="states-table-container"
+                        id="states-table">
+                        <StatesTable
+                            loading={pendingInfo || pendingCurrent || loadingLayers}
+                            data={states}
+                            info={info}
+                            colors={colors}
+                            properties={properties}
+                            domain={domain}
+                            idProperty={idProperty}
+                            stateLabelProperty={stateLabelProperty}
+                            selected={query?.selected}
+                            onSelect={handleStatesSelect}
+                            sort={query?.sort}
+                            order={query?.order}
+                            onSort={handleStatesSort}
+                        />
+                    </div>
+
+                    <div className="attributions-container">
+                        <div className="text-box">
+                            <p><small><HTML msgId="customMessages.requestDateMessage" /></small></p>
+                            <p>
+                                <HTML msgId="customMessages.sourcesAttribution"/>
+                            </p>
+                            <p>
+                                <HTML msgId="customMessages.builtWithAttribution" />
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </BorderLayout>
     );
 }
+
+const DashboardLayout = ({ loading, ...props}, context) => {
+    if (loading) {
+        return (
+            <>
+            <div className="_ms2_init_spinner _ms2_init_center">
+                <div></div>
+            </div>
+            <div className="_ms2_init_text _ms2_init_center">Loading MapStore</div>
+            </>
+        );
+    }
+    return <DashboardLayoutComponent { ...props } loadedPlugins={context.loadedPlugins} />;
+};
 
 DashboardLayout.contextTypes = {
     loadedPlugins: PropTypes.object
 };
 
+
 const selector = createSelector([
     state => state?.refresh?.count,
-    state => state?.refresh?.date
-], (requestsNeedUpdate, requestDate) => ({ requestsNeedUpdate, requestDate }));
+    state => state?.refresh?.date,
+    state => state?.controls?.dashboardlayout?.loading ?? true
+], (requestsNeedUpdate, requestDate, loading) => ({ requestsNeedUpdate, requestDate, loading }));
 
 const DashboardLayoutPlugin = withRouter(connect(selector)(DashboardLayout));
 
 export default createPlugin('DashboardLayout', {
-    component: DashboardLayoutPlugin
+    component: DashboardLayoutPlugin,
+    epics: {
+        mcuInitProject,
+        mcCheckLocationChange
+    }
 });

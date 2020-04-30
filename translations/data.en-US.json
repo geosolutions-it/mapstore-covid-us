@@ -9,11 +9,17 @@
             "totalTestResults": "Total Test",
             "positive": "Positive",
             "negative": "Negative",
-            "death": "Death",
+            "death": "Deaths",
             "recovered": "Recovered",
             "hospitalizedCurrently": "Hospitalized",
             "inIcuCurrently": "In ICU",
             "onVentilatorCurrently": "On Ventilator",
+            "dateChecked": "Date",
+            "count": "Count",
+
+            "stateLabel": "United States",
+            "chartDataLabel": "Chart data is referred to United States",
+            "chartDataLabelSelected": "Chart data is referred to {label}",
 
             "shareButton": "Copy and share page link",
             "copyLink": "Share link",
@@ -47,6 +53,10 @@
             "mapContainer": {
                 "title": "Map Viewer",
                 "text": "The viewer provide a map and tools to navigate COVID-19 data."
+            },
+            "chartContainer": {
+                "title": "Interactive Chart",
+                "text": "The charts shows checked date on the x axis and count of selected values on the y axis. Data is referred to the selected state or all United States"
             },
             "statesTable": {
                 "title": "States Table",

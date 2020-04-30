@@ -21,7 +21,7 @@ import { MapPlugin as MSMapPlugin, reducers, epics } from '@mapstore/plugins/Map
 import usePromise from '@js/hooks/usePromise';
 import axios from '@mapstore/libs/ajax';
 import { addLayer, removeLayer, updateNode, moveNode } from '@mapstore/actions/layers';
-import { setControlProperties } from '@mapstore/actions/controls';
+import { setControlProperty } from '@mapstore/actions/controls';
 import { resizeMap } from '@mapstore/actions/map';
 import { scaleLinear } from 'd3-scale';
 import useDeepCompareEffect from 'use-deep-compare-effect';
@@ -348,7 +348,7 @@ export default createPlugin('MapViewer', {
         onResize: resizeMap,
         onZoomTo: zoomTo,
         onMove: moveNode,
-        updateMaxBbox: setControlProperties.bind(null, 'map', 'maxBbox')
+        updateMaxBbox: setControlProperty.bind(null, 'map', 'maxBbox')
     })(
         loadingState(({ map, loadingError }) => !map && !loadingError)(withRouter(withResizeDetector(MapViewerPlugin)))
     ),

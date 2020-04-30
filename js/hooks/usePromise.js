@@ -27,14 +27,14 @@ const usePromise = ({
     const handleResolve = (response, count) => {
         if (!cancelled.current && count === counter.current) {
             setState({ response });
-            onResolve(response);
+            onResolve(response, count);
             handlePending(false);
         }
     };
     const handleReject = (error, count) => {
         if (!cancelled.current && count === counter.current) {
             setState({ error });
-            onReject(error);
+            onReject(error, count);
             handlePending(false);
         }
     };

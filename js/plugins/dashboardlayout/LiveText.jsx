@@ -34,7 +34,6 @@ function LiveText({
                         deaths: numeral(deaths).format('0,0')
                     }}
                 />
-                <small><HTML msgId="customMessages.requestDateMessage" /></small>
             </div>
         )
         : null;
