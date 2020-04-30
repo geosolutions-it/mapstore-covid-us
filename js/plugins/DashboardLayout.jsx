@@ -64,11 +64,11 @@ function DashboardLayout({
     },
     endpoint = {
         info: {
-            url: 'https://covidtracking.com/api/states/info',
+            url: 'https://covidtracking.com/api/v1/states/info.json',
             propertiesKeys: ['state', 'name']
         },
         current: {
-            url: 'https://covidtracking.com/api/states',
+            url: 'https://covidtracking.com/api/v1/states/current.json',
             propertiesKeys: ['state', 'dateModified'],
             countKeys: [
                 'totalTestResults',
