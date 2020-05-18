@@ -47,12 +47,12 @@
         "thumbURL": "static/osm-simple-light.jpeg",
         "type": "wms",
         "url": [
-          "https://1maps.geo-solutions.it/geoserver/wms",
-          "https://2maps.geo-solutions.it/geoserver/wms",
-          "https://3maps.geo-solutions.it/geoserver/wms",
-          "https://4maps.geo-solutions.it/geoserver/wms",
-          "https://5maps.geo-solutions.it/geoserver/wms",
-          "https://6maps.geo-solutions.it/geoserver/wms"
+          "https://maps1.geosolutionsgroup.com/geoserver/wms",
+          "https://maps2.geosolutionsgroup.com/geoserver/wms",
+          "https://maps3.geosolutionsgroup.com/geoserver/wms",
+          "https://maps4.geosolutionsgroup.com/geoserver/wms",
+          "https://maps5.geosolutionsgroup.com/geoserver/wms",
+          "https://maps6.geosolutionsgroup.com/geoserver/wms"
         ],
         "source": "osm_simple_light",
         "visibility": false,
@@ -70,12 +70,12 @@
         "thumbURL": "static/osm-bright.jpg",
         "type": "wms",
         "url": [
-          "https://1maps.geo-solutions.it/geoserver/wms",
-          "https://2maps.geo-solutions.it/geoserver/wms",
-          "https://3maps.geo-solutions.it/geoserver/wms",
-          "https://4maps.geo-solutions.it/geoserver/wms",
-          "https://5maps.geo-solutions.it/geoserver/wms",
-          "https://6maps.geo-solutions.it/geoserver/wms"
+          "https://maps1.geosolutionsgroup.com/geoserver/wms",
+          "https://maps2.geosolutionsgroup.com/geoserver/wms",
+          "https://maps3.geosolutionsgroup.com/geoserver/wms",
+          "https://maps4.geosolutionsgroup.com/geoserver/wms",
+          "https://maps5.geosolutionsgroup.com/geoserver/wms",
+          "https://maps6.geosolutionsgroup.com/geoserver/wms"
         ],
         "source": "osm",
         "visibility": false,
@@ -93,12 +93,12 @@
         "thumbURL": "static/s2cloudless.jpeg",
         "type": "wms",
         "url": [
-          "https://1maps.geo-solutions.it/geoserver/wms",
-          "https://2maps.geo-solutions.it/geoserver/wms",
-          "https://3maps.geo-solutions.it/geoserver/wms",
-          "https://4maps.geo-solutions.it/geoserver/wms",
-          "https://5maps.geo-solutions.it/geoserver/wms",
-          "https://6maps.geo-solutions.it/geoserver/wms"
+          "https://maps1.geosolutionsgroup.com/geoserver/wms",
+          "https://maps2.geosolutionsgroup.com/geoserver/wms",
+          "https://maps3.geosolutionsgroup.com/geoserver/wms",
+          "https://maps4.geosolutionsgroup.com/geoserver/wms",
+          "https://maps5.geosolutionsgroup.com/geoserver/wms",
+          "https://maps6.geosolutionsgroup.com/geoserver/wms"
         ],
         "source": "s2cloudless",
         "visibility": false,
