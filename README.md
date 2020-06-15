@@ -4,7 +4,7 @@
 
 ![Map Example](/images/covid-map.png)
 
-Demo Site at:https://www.covidtrackingmap.com/
+Tracking COVID 19 cases in the US, live at https://www.covidtrackingmap.com/
 
 This is an experimental Dashboard for COVID-19 US Tracking built using [MapStore](https://mapstore.geo-solutions.it/mapstore/#/)
 
