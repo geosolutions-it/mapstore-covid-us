@@ -38,7 +38,7 @@ const Chart = ({
     const { pending } = usePromise({
         promiseFn: (cancelToken) => {
             const url = selected
-                ? endpoint?.dailyState?.url?.replace?.(/\{state\}/g, selected)
+                ? endpoint?.dailyState?.url?.replace?.(/\{state\}/g, selected.toLowerCase())
                 : endpoint?.daily?.url;
             return axios.get(url, {
                 cancelToken: new CancelToken(function executor(cancel) {
