@@ -45,14 +45,14 @@
     },
     "endpoint": {
       "info": {
-        "url": "https://covidtracking.com/api/v1/states/info.json",
+        "url": "https://api.covidtracking.com/v1/states/info.json",
         "propertiesKeys": [
           "state",
           "name"
         ]
       },
       "current": {
-        "url": "https://covidtracking.com/api/v1/states/current.json",
+        "url": "https://api.covidtracking.com/v1/states/current.json",
         "propertiesKeys": [
           "state",
           "dateModified"
@@ -69,10 +69,10 @@
         ]
       },
       "daily": {
-        "url": "https://covidtracking.com/api/v1/us/daily.json"
+        "url": "https://api.covidtracking.com/v1/us/daily.json"
       },
       "dailyState": {
-        "url": "https://covidtracking.com/api/v1/states/{state}/daily.json"
+        "url": "https://api.covidtracking.com/v1/states/{state}/daily.json"
       }
     }
   },
